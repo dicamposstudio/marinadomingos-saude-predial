@@ -32,7 +32,7 @@ um repositório comum quanto em domínio próprio.
 
 - Marina Domingos Fernandes;
 - Arquiteta e Urbanista — CAU/PE A254051-7;
-- Pós-graduanda em Patologia das Construções;
+- Pós-graduada em Patologia das Construções;
 - WhatsApp: (81) 99784-2480;
 - Instagram: @marinadomingosarq;
 - Atendimento em Recife e Região Metropolitana.
