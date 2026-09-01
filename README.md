@@ -25,32 +25,33 @@ um repositório comum quanto em domínio próprio.
 - `assets/images/`: fotografias e logomarca otimizadas;
 - `favicon.png` e `favicon.svg`: ícones do navegador;
 - `robots.txt`: orientação para mecanismos de busca;
+- `sitemap.xml`: mapa do site enviado aos mecanismos de busca;
 - `.nojekyll`: impede o processamento desnecessário pelo Jekyll.
 
 ## Informações profissionais utilizadas
 
 - Marina Domingos Fernandes;
 - Arquiteta e Urbanista — CAU/PE A254051-7;
-- Pós-graduada em Patologia das Construções;
+- Pós-graduanda em Patologia das Construções;
 - WhatsApp: (81) 99784-2480;
 - Instagram: @marinadomingosarq;
 - Atendimento em Recife e Região Metropolitana.
 
 ## Domínio próprio
 
-Quando `marinadomingos.com.br` for registrado, configure primeiro o domínio nas
-opções do GitHub Pages. Depois, siga os registros DNS informados pelo GitHub e
-adicione um arquivo `CNAME` na raiz contendo apenas:
+O domínio `marinadomingos.com.br` está configurado nas opções do GitHub Pages.
+O arquivo `CNAME` na raiz deve permanecer contendo apenas:
 
 ```text
 marinadomingos.com.br
 ```
 
-Somente após o domínio estar ativo, adicione a URL canônica e o `sitemap.xml`.
+As URLs canônicas, as tags sociais, o `robots.txt` e o `sitemap.xml` utilizam o
+domínio próprio.
 
 ## Atualizações futuras
 
 - Inserir laudos anonimizados, casos e depoimentos apenas com autorização;
 - configurar GTM/GA4 quando os identificadores estiverem disponíveis;
 - revisar o Perfil da Empresa no Google;
-- adicionar URL canônica e sitemap depois da ativação do domínio.
+- acompanhar cobertura e desempenho no Google Search Console.

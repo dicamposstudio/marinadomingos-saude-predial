@@ -1,4 +1,4 @@
 User-agent: *
 Allow: /
 
-# O sitemap e a URL canônica serão adicionados após a ativação do domínio próprio.
+Sitemap: https://marinadomingos.com.br/sitemap.xml
