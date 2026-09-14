@@ -4,6 +4,7 @@
   const root = document.documentElement;
   const revealItems = [...document.querySelectorAll(".reveal")];
   const reducedMotion = window.matchMedia("(prefers-reduced-motion: reduce)").matches;
+  const pageType = document.body.dataset.pageType || "institutional_home";
 
   document.querySelectorAll("[data-current-year]").forEach((item) => {
     item.textContent = String(new Date().getFullYear());
@@ -39,7 +40,9 @@
         event: trackedLink.dataset.event,
         cta_location: trackedLink.dataset.location,
         service_name: trackedLink.dataset.service,
-        page_type: "institutional_home"
+        page_type: pageType,
+        page_path: window.location.pathname,
+        link_text: trackedLink.textContent.trim().replace(/\s+/g, " ").slice(0, 80)
       });
     }
 

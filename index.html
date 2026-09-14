@@ -38,27 +38,54 @@ j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
     <link rel="icon" href="favicon.svg" type="image/svg+xml">
     <link rel="preload" href="assets/images/marina-domingos-hero.webp" as="image" type="image/webp" fetchpriority="high">
     <link rel="stylesheet" href="assets/css/styles.css">
+    <link rel="stylesheet" href="assets/css/pages.css">
 
     <script type="application/ld+json">
       {
         "@context": "https://schema.org",
-        "@type": "ProfessionalService",
-        "@id": "https://marinadomingos.com.br/#professional-service",
-        "name": "Marina Domingos | Saúde Predial",
-        "description": "Vistorias de imóveis, inspeções e laudos técnicos em Recife e Região Metropolitana.",
-        "url": "https://marinadomingos.com.br/",
-        "logo": "https://marinadomingos.com.br/assets/images/marina-domingos-logo.png",
-        "image": "https://marinadomingos.com.br/assets/images/marina-domingos-hero.webp",
-        "telephone": "+5581997842480",
-        "areaServed": [
-          {"@type": "City", "name": "Recife"},
-          {"@type": "AdministrativeArea", "name": "Região Metropolitana do Recife"}
-        ],
-        "sameAs": ["https://www.instagram.com/marinadomingosarq/"]
+        "@graph": [
+          {
+            "@type": "WebSite",
+            "@id": "https://marinadomingos.com.br/#website",
+            "name": "Marina Domingos | Saúde Predial",
+            "url": "https://marinadomingos.com.br/",
+            "inLanguage": "pt-BR"
+          },
+          {
+            "@type": "ProfessionalService",
+            "@id": "https://marinadomingos.com.br/#professional-service",
+            "name": "Marina Domingos | Saúde Predial",
+            "description": "Vistorias de imóveis, inspeções e laudos técnicos em Recife e Região Metropolitana.",
+            "url": "https://marinadomingos.com.br/",
+            "logo": "https://marinadomingos.com.br/assets/images/marina-domingos-logo.png",
+            "image": "https://marinadomingos.com.br/assets/images/marina-domingos-hero.webp",
+            "telephone": "+5581997842480",
+            "founder": {
+              "@type": "Person",
+              "name": "Marina Domingos Fernandes",
+              "jobTitle": "Arquiteta e Urbanista"
+            },
+            "areaServed": [
+              {"@type": "City", "name": "Recife"},
+              {"@type": "AdministrativeArea", "name": "Região Metropolitana do Recife"}
+            ],
+            "hasOfferCatalog": {
+              "@type": "OfferCatalog",
+              "name": "Vistorias e laudos técnicos",
+              "itemListElement": [
+                {"@type": "Offer", "itemOffered": {"@type": "Service", "name": "Vistoria de recebimento de imóvel novo", "url": "https://marinadomingos.com.br/vistoria-imovel-novo-recife/"}},
+                {"@type": "Offer", "itemOffered": {"@type": "Service", "name": "Vistoria pré-compra de imóvel usado", "url": "https://marinadomingos.com.br/vistoria-pre-compra-recife/"}},
+                {"@type": "Offer", "itemOffered": {"@type": "Service", "name": "Vistoria de locação", "url": "https://marinadomingos.com.br/vistoria-locacao-recife/"}},
+                {"@type": "Offer", "itemOffered": {"@type": "Service", "name": "Laudos e análise de manifestações patológicas", "url": "https://marinadomingos.com.br/laudos-patologia-construcoes-recife/"}}
+              ]
+            },
+            "sameAs": ["https://www.instagram.com/marinadomingosarq/"]
+          }
+        ]
       }
     </script>
   </head>
-  <body><!-- Google Tag Manager (noscript) -->
+  <body data-page-type="institutional_home"><!-- Google Tag Manager (noscript) -->
 <noscript><iframe src="https://www.googletagmanager.com/ns.html?id=GTM-KW8Q4RNV"
 height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
 <!-- End Google Tag Manager (noscript) -->
@@ -88,6 +115,7 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
 
         <nav class="desktop-nav" aria-label="Navegação principal">
           <a href="#servicos">Serviços</a>
+          <a href="casos-reais/">Casos reais</a>
           <a href="#como-funciona">Como funciona</a>
           <a href="#sobre">Sobre</a>
           <a href="#duvidas">Dúvidas</a>
@@ -101,6 +129,7 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
           <summary aria-label="Abrir menu">Menu <svg class="icon" aria-hidden="true"><use href="#icon-chevron-down"/></svg></summary>
           <nav aria-label="Navegação móvel">
             <a href="#servicos">Serviços</a>
+            <a href="casos-reais/">Casos reais</a>
             <a href="#como-funciona">Como funciona</a>
             <a href="#sobre">Sobre</a>
             <a href="#duvidas">Dúvidas</a>
@@ -130,7 +159,7 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
           </div>
           <div class="hero-credential" aria-label="Credenciais profissionais">
             <svg class="icon" aria-hidden="true"><use href="#icon-shield-check"/></svg>
-            <p><strong>Arquiteta e Urbanista</strong>CAU/PE A254051-7 · Pós-graduada em Patologia das Construções</p>
+            <p><strong>Arquiteta e Urbanista</strong>CAU/PE A254051-7 · Especialista em Patologia das Construções</p>
           </div>
         </div>
       </section>
@@ -182,12 +211,28 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
           </div>
 
           <div class="services-grid">
-            <article class="service-card reveal featured"><span>01</span><h3>Recebimento de imóvel novo</h3><p>Conferência técnica da unidade antes da mudança, com registro das pendências aparentes previstas no escopo.</p><strong>Serviço prioritário</strong></article>
-            <article class="service-card reveal"><span>02</span><h3>Vistoria de locação</h3><p>Registro organizado do estado aparente do imóvel na entrada ou na saída, por ambiente e com evidências fotográficas.</p></article>
-            <article class="service-card reveal"><span>03</span><h3>Cautelar de vizinhança</h3><p>Memória técnica das condições aparentes dos imóveis vizinhos antes do início de uma obra ou intervenção.</p></article>
-            <article class="service-card reveal"><span>04</span><h3>Vistoria de constatação</h3><p>Documentação técnica de uma condição, ocorrência ou estado observado em data determinada e dentro de escopo definido.</p></article>
-            <article class="service-card reveal"><span>05</span><h3>Laudo de inspeção predial</h3><p>Inspeção da edificação e elaboração de laudo conforme o escopo e, quando existente, o Termo de Referência aplicável.</p></article>
-            <article class="service-card reveal"><span>06</span><h3>Laudos e manifestações patológicas</h3><p>Análise de fissuras, umidade, infiltrações e outras manifestações, com conclusões e recomendações compatíveis com o escopo.</p></article>
+            <a class="service-card reveal featured" href="vistoria-imovel-novo-recife/" data-event="click_service" data-location="services-grid" data-service="vistoria-imovel-novo"><span>01</span><h3>Recebimento de imóvel novo</h3><p>Conferência técnica da unidade antes da mudança, com registro das pendências aparentes previstas no escopo.</p><strong>Saiba mais →</strong></a>
+            <a class="service-card reveal" href="vistoria-pre-compra-recife/" data-event="click_service" data-location="services-grid" data-service="vistoria-pre-compra"><span>02</span><h3>Vistoria pré-compra</h3><p>Leitura técnica das condições aparentes do imóvel usado para apoiar perguntas e uma decisão mais informada.</p><strong>Saiba mais →</strong></a>
+            <a class="service-card reveal" href="vistoria-locacao-recife/" data-event="click_service" data-location="services-grid" data-service="vistoria-locacao"><span>03</span><h3>Vistoria de locação</h3><p>Registro organizado do estado aparente do imóvel na entrada ou na saída, por ambiente e com evidências fotográficas.</p><strong>Saiba mais →</strong></a>
+            <a class="service-card reveal" href="https://wa.me/5581997842480?text=Ol%C3%A1%2C%20Marina%21%20Quero%20saber%20sobre%20vistoria%20cautelar%20de%20vizinhan%C3%A7a." target="_blank" rel="noopener noreferrer" data-event="click_whatsapp" data-location="services-grid" data-service="cautelar-vizinhanca"><span>04</span><h3>Cautelar de vizinhança</h3><p>Memória técnica das condições aparentes dos imóveis vizinhos antes do início de uma obra ou intervenção.</p><strong>Consultar →</strong></a>
+            <a class="service-card reveal" href="https://wa.me/5581997842480?text=Ol%C3%A1%2C%20Marina%21%20Quero%20saber%20sobre%20inspe%C3%A7%C3%A3o%20predial." target="_blank" rel="noopener noreferrer" data-event="click_whatsapp" data-location="services-grid" data-service="inspecao-predial"><span>05</span><h3>Laudo de inspeção predial</h3><p>Inspeção da edificação e elaboração de laudo conforme o escopo e, quando existente, o Termo de Referência aplicável.</p><strong>Consultar →</strong></a>
+            <a class="service-card reveal" href="laudos-patologia-construcoes-recife/" data-event="click_service" data-location="services-grid" data-service="laudo-patologia"><span>06</span><h3>Laudos e manifestações patológicas</h3><p>Análise de fissuras, umidade, infiltrações e outras manifestações, com conclusões e recomendações compatíveis com o escopo.</p><strong>Saiba mais →</strong></a>
+          </div>
+        </div>
+      </section>
+
+      <section class="home-cases section" aria-labelledby="home-cases-title">
+        <div class="container home-cases-grid">
+          <div class="home-cases-intro reveal">
+            <p class="section-index">03 — Experiência aplicada</p>
+            <h2 id="home-cases-title">Trabalhos reais. Privacidade preservada.</h2>
+            <p>Conheça exemplos de vistoria locatícia, análise de manifestações patológicas e documentação de edificação comercial — apresentados sem nomes, endereços, documentos ou imagens identificáveis.</p>
+            <a class="button button-dark" href="casos-reais/" data-event="click_cases" data-location="home-cases">Conhecer os casos <svg class="icon" aria-hidden="true"><use href="#icon-arrow-right"/></svg></a>
+          </div>
+          <div class="home-cases-list reveal" aria-label="Casos apresentados">
+            <a href="casos-reais/#vistoria-locacao"><span>01</span><div><strong>Vistoria de entrada</strong><small>Apartamento mobiliado</small></div><svg class="icon" aria-hidden="true"><use href="#icon-arrow-right"/></svg></a>
+            <a href="casos-reais/#manifestacoes-residenciais"><span>02</span><div><strong>Manifestações patológicas</strong><small>Unidade residencial</small></div><svg class="icon" aria-hidden="true"><use href="#icon-arrow-right"/></svg></a>
+            <a href="casos-reais/#edificacao-comercial"><span>03</span><div><strong>Laudo técnico</strong><small>Edificação comercial</small></div><svg class="icon" aria-hidden="true"><use href="#icon-arrow-right"/></svg></a>
           </div>
         </div>
       </section>
@@ -195,7 +240,7 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
       <section class="method-section section" id="como-funciona" aria-labelledby="method-title">
         <div class="container method-layout">
           <div class="method-intro reveal">
-            <p class="section-index">03 — Como funciona</p>
+            <p class="section-index">04 — Como funciona</p>
             <h2 id="method-title">Do primeiro contato à orientação final.</h2>
             <p>Um processo objetivo para entender a necessidade, definir o escopo correto e transformar observações técnicas em informação útil.</p>
           </div>
@@ -236,7 +281,7 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
             <img src="assets/images/marina-domingos-retrato.webp" width="829" height="1800" loading="lazy" alt="Retrato profissional da arquiteta Marina Domingos">
           </div>
           <div class="about-copy reveal">
-            <p class="section-index">04 — A profissional</p>
+            <p class="section-index">05 — A profissional</p>
             <h2 id="about-title">Marina Domingos</h2>
             <p class="about-role">Arquiteta e Urbanista · CAU/PE A254051-7</p>
             <p>Atuo com vistorias, inspeções e documentação técnica do estado dos imóveis em Recife e Região Metropolitana. Meu trabalho traduz sinais e evidências em explicações acessíveis, para que o cliente compreenda o que foi observado e tome decisões com mais segurança.</p>
@@ -251,7 +296,7 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
       <section class="faq-section section" id="duvidas" aria-labelledby="faq-title">
         <div class="container faq-grid">
           <div class="faq-intro reveal">
-            <p class="section-index">05 — Dúvidas frequentes</p>
+            <p class="section-index">06 — Dúvidas frequentes</p>
             <h2 id="faq-title">Informação clara desde o primeiro contato.</h2>
             <p>Se a sua situação não estiver aqui, me envie uma mensagem. Farei as perguntas necessárias para indicar o serviço que irá melhor lhe atender.</p>
           </div>
@@ -282,10 +327,20 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
     </main>
 
     <footer class="site-footer">
-      <div class="container footer-grid">
+      <div class="container footer-grid four-columns">
         <div>
           <img src="assets/images/marina-domingos-logo.png" width="900" height="436" loading="lazy" alt="Marina Domingos — Saúde Predial">
           <p>Vistorias, inspeções e laudos técnicos para decisões mais seguras sobre o seu imóvel.</p>
+        </div>
+        <div>
+          <h2>Serviços</h2>
+          <div class="footer-links-list">
+            <a href="vistoria-imovel-novo-recife/">Imóvel novo</a>
+            <a href="vistoria-pre-compra-recife/">Pré-compra</a>
+            <a href="vistoria-locacao-recife/">Locação</a>
+            <a href="laudos-patologia-construcoes-recife/">Laudos técnicos</a>
+            <a href="casos-reais/">Casos reais</a>
+          </div>
         </div>
         <div>
           <h2>Atendimento</h2>
@@ -301,7 +356,7 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
       </div>
       <div class="container footer-bottom">
         <span>© <span data-current-year>2026</span> Marina Domingos. Todos os direitos reservados.</span>
-        <a href="https://www.instagram.com/marinadomingosarq/" target="_blank" rel="noopener noreferrer">Instagram</a>
+        <span><a href="casos-reais/">Casos reais</a> · <a href="https://www.instagram.com/marinadomingosarq/" target="_blank" rel="noopener noreferrer">Instagram</a></span>
       </div>
     </footer>
 

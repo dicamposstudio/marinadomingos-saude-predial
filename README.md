@@ -18,9 +18,15 @@ um repositório comum quanto em domínio próprio.
 
 ## Estrutura principal
 
-- `index.html`: conteúdo, metadados e estrutura da página;
+- `index.html`: página institucional e porta de entrada para os serviços;
+- `vistoria-imovel-novo-recife/`: página do serviço de recebimento;
+- `vistoria-pre-compra-recife/`: página do serviço para imóvel usado;
+- `vistoria-locacao-recife/`: página do serviço de entrada ou saída;
+- `laudos-patologia-construcoes-recife/`: página de laudos e manifestações;
+- `casos-reais/`: sínteses anonimizadas da experiência profissional;
 - `404.html`: página de erro personalizada;
 - `assets/css/styles.css`: identidade visual e responsividade;
+- `assets/css/pages.css`: componentes das páginas internas e casos;
 - `assets/js/main.js`: animações progressivas e eventos de clique;
 - `assets/images/`: fotografias e logomarca otimizadas;
 - `favicon.png` e `favicon.svg`: ícones do navegador;
@@ -32,7 +38,7 @@ um repositório comum quanto em domínio próprio.
 
 - Marina Domingos Fernandes;
 - Arquiteta e Urbanista — CAU/PE A254051-7;
-- Pós-graduada em Patologia das Construções;
+- Especialista em Patologia das Construções;
 - WhatsApp: (81) 99784-2480;
 - Instagram: @marinadomingosarq;
 - Atendimento em Recife e Região Metropolitana.
@@ -51,7 +57,12 @@ domínio próprio.
 
 ## Atualizações futuras
 
-- Inserir laudos anonimizados, casos e depoimentos apenas com autorização;
-- configurar GTM/GA4 quando os identificadores estiverem disponíveis;
+- Publicar as páginas novas somente depois da revisão de Marina;
+- criar páginas para vistoria cautelar de vizinhança e inspeção predial;
+- integrar o núcleo de artigos educativos às páginas de serviço;
+- inserir fotografias de trabalhos e depoimentos apenas com autorização;
+- revisar a política de privacidade e a configuração de consentimento;
 - revisar o Perfil da Empresa no Google;
 - acompanhar cobertura e desempenho no Google Search Console.
+
+Consulte `REVISAO-SITE-AUTORIDADE.md` antes de publicar esta versão.
