@@ -222,6 +222,62 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
         </div>
       </section>
 
+
+      <section class="quote-section section" id="solicitar-avaliacao" aria-labelledby="quote-title-home">
+        <div class="container quote-grid">
+          <div class="quote-copy reveal">
+            <p class="eyebrow">Atendimento inicial</p>
+            <h2 id="quote-title-home">Conte um pouco sobre o imóvel.</h2>
+            <p>Preencha as informações básicas abaixo. Ao continuar, o WhatsApp será aberto com a mensagem pronta para você enviar à Marina.</p>
+            <div class="quote-note">
+              <strong>Leva menos de um minuto.</strong>
+              <span>Não é necessário informar endereço completo, telefone ou e-mail.</span>
+            </div>
+          </div>
+
+          <form class="quote-form reveal" data-whatsapp-quote-form data-form-location="home" data-default-service="">
+            <div class="quote-form-header">
+              <span>Solicite uma avaliação</span>
+              <small>Os dados são usados apenas para montar a mensagem no WhatsApp.</small>
+            </div>
+
+            <div class="quote-fields">
+              <label class="quote-field">
+                <span>Seu nome</span>
+                <input type="text" name="name" autocomplete="name" placeholder="Ex.: Carlos" required maxlength="80">
+              </label>
+
+              <label class="quote-field">
+                <span>Tipo de serviço</span>
+                <select name="service" required>
+                  <option value="">Selecione o serviço</option><option value="vistoria-imovel-novo">Vistoria de Imóvel Novo</option><option value="vistoria-pre-compra">Vistoria Pré-Compra</option><option value="vistoria-locacao">Vistoria de Locação</option><option value="cautelar-vizinhanca">Vistoria Cautelar de Vizinhança</option><option value="inspecao-predial">Laudo de Inspeção Predial</option><option value="laudo-patologia">Laudos / Patologia das Construções</option>
+                </select>
+              </label>
+
+              <label class="quote-field quote-field-wide">
+                <span>Bairro / Cidade</span>
+                <input type="text" name="location" autocomplete="address-level2" placeholder="Ex.: Boa Viagem, Recife" required maxlength="120">
+              </label>
+
+              <label class="quote-field">
+                <span>Área aproximada</span>
+                <span class="quote-input-suffix">
+                  <input type="number" name="area" inputmode="decimal" min="1" max="100000" step="1" placeholder="Ex.: 84" required aria-describedby="area-hint-home">
+                  <span aria-hidden="true">m²</span>
+                </span>
+                <small id="area-hint-home">Pode ser uma estimativa.</small>
+              </label>
+            </div>
+
+            <button class="button quote-submit" type="submit">
+              Solicitar avaliação pelo WhatsApp
+              <svg class="icon" aria-hidden="true"><use href="#icon-arrow-right"/></svg>
+            </button>
+            <p class="quote-privacy">Ao clicar, você será direcionado ao WhatsApp com essas informações preenchidas. O envio só acontece quando você confirmar a mensagem.</p>
+          </form>
+        </div>
+      </section>
+
       <section class="home-cases section" aria-labelledby="home-cases-title">
         <div class="container home-cases-grid">
           <div class="home-cases-intro reveal">

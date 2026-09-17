@@ -52,4 +52,65 @@
       mobileMenu.open = false;
     }
   });
+
+  const serviceLabels = {
+    "vistoria-imovel-novo": "Vistoria de Imóvel Novo",
+    "vistoria-pre-compra": "Vistoria Pré-Compra",
+    "vistoria-locacao": "Vistoria de Locação",
+    "cautelar-vizinhanca": "Vistoria Cautelar de Vizinhança",
+    "inspecao-predial": "Laudo de Inspeção Predial",
+    "laudo-patologia": "Laudos / Patologia das Construções"
+  };
+
+  document.querySelectorAll("[data-whatsapp-quote-form]").forEach((form) => {
+    if (!(form instanceof HTMLFormElement)) return;
+
+    const serviceSelect = form.elements.namedItem("service");
+    const defaultService = form.dataset.defaultService;
+    if (serviceSelect instanceof HTMLSelectElement && defaultService && serviceLabels[defaultService]) {
+      serviceSelect.value = defaultService;
+    }
+
+    form.addEventListener("submit", (event) => {
+      event.preventDefault();
+
+      if (!form.reportValidity()) return;
+
+      const data = new FormData(form);
+      const name = String(data.get("name") || "").trim();
+      const service = String(data.get("service") || "").trim();
+      const location = String(data.get("location") || "").trim();
+      const area = String(data.get("area") || "").trim();
+      const serviceLabel = serviceLabels[service] || service;
+
+      const message = [
+        `Olá, Marina! Meu nome é ${name}.`,
+        "Gostaria de solicitar informações sobre:",
+        "",
+        `🏠 Serviço: ${serviceLabel}`,
+        `📍 Localização: ${location}`,
+        `📐 Área aproximada: ${area} m²`,
+        "",
+        "Vim pelo site e gostaria de receber um orçamento."
+      ].join("\n");
+
+      window.dataLayer = window.dataLayer || [];
+      window.dataLayer.push({
+        event: "form_whatsapp_submit",
+        cta_location: form.dataset.formLocation || "quote-form",
+        service_name: service,
+        page_type: pageType,
+        page_path: window.location.pathname
+      });
+
+      const whatsappUrl = `https://wa.me/5581997842480?text=${encodeURIComponent(message)}`;
+      const whatsappWindow = window.open(whatsappUrl, "_blank");
+      if (whatsappWindow) {
+        whatsappWindow.opener = null;
+      } else {
+        window.location.href = whatsappUrl;
+      }
+    });
+  });
+
 })();

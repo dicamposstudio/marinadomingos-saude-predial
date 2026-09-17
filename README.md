@@ -27,7 +27,7 @@ um repositório comum quanto em domínio próprio.
 - `404.html`: página de erro personalizada;
 - `assets/css/styles.css`: identidade visual e responsividade;
 - `assets/css/pages.css`: componentes das páginas internas e casos;
-- `assets/js/main.js`: animações progressivas e eventos de clique;
+- `assets/js/main.js`: animações progressivas, eventos de clique e solicitação de avaliação via WhatsApp;
 - `assets/images/`: fotografias e logomarca otimizadas;
 - `favicon.png` e `favicon.svg`: ícones do navegador;
 - `robots.txt`: orientação para mecanismos de busca;
@@ -54,6 +54,17 @@ marinadomingos.com.br
 
 As URLs canônicas, as tags sociais, o `robots.txt` e o `sitemap.xml` utilizam o
 domínio próprio.
+
+## Solicitação de avaliação pelo WhatsApp
+
+A página inicial e as quatro páginas principais de serviço incluem uma caixa de
+atendimento inicial com nome, tipo de serviço, bairro/cidade e área aproximada.
+Ao enviar, o site abre o WhatsApp da Marina com a mensagem preenchida para o
+visitante confirmar o envio. Nenhum dado do formulário é armazenado pelo site.
+
+O evento `form_whatsapp_submit` é enviado ao `dataLayer` com o serviço escolhido,
+a posição do formulário, o tipo de página e o caminho acessado. Nome, bairro/cidade
+e metragem não são enviados ao Analytics.
 
 ## Atualizações futuras
 
