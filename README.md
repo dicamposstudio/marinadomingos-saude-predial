@@ -77,3 +77,10 @@ e metragem não são enviados ao Analytics.
 - acompanhar cobertura e desempenho no Google Search Console.
 
 Consulte `REVISAO-SITE-AUTORIDADE.md` antes de publicar esta versão.
+
+## Otimizações de desempenho — 18/09/2026
+
+- Logo de interface convertido para WebP e redimensionado para 480 px, mantendo o PNG original apenas como referência/backup.
+- Home passou de três folhas de estilo bloqueantes para uma única (`assets/css/home.css`), preservando a mesma ordem de cascata visual.
+- Imagens abaixo da dobra continuam com `loading="lazy"`; a imagem principal do hero permanece com preload e `fetchpriority="high"`.
+- GTM/GA4 foram preservados para não comprometer a mensuração de conversões.
