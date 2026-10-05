@@ -5,6 +5,37 @@
   const revealItems = [...document.querySelectorAll(".reveal")];
   const reducedMotion = window.matchMedia("(prefers-reduced-motion: reduce)").matches;
   const pageType = document.body.dataset.pageType || "institutional_home";
+  const pagePath = window.location.pathname;
+
+  const serviceRoutes = [
+    ["/vistoria-imovel-novo-recife/", "vistoria-imovel-novo"],
+    ["/vistoria-pre-compra-recife/", "vistoria-pre-compra"],
+    ["/vistoria-locacao-recife/", "vistoria-locacao"],
+    ["/laudos-patologia-construcoes-recife/", "laudo-patologia"],
+    ["/blog/checklist-vistoria-apartamento-novo/", "vistoria-imovel-novo"],
+    ["/blog/o-que-verificar-imovel-usado/", "vistoria-pre-compra"],
+    ["/blog/fissura-ou-infiltracao-quando-chamar-profissional/", "laudo-patologia"],
+    ["/casos-reais/", "casos-reais"],
+    ["/blog/", "conteudos"]
+  ];
+
+  const pageService =
+    serviceRoutes.find(([route]) => pagePath.includes(route))?.[1] || "geral";
+
+  const inferCtaLocation = (link) => {
+    if (link.dataset.location) return link.dataset.location;
+    if (link.closest(".mobile-menu")) return "mobile-menu";
+    if (link.closest(".site-footer")) return "footer";
+    if (link.closest(".site-header")) return "header";
+    if (link.closest(".floating-whatsapp")) return "floating";
+    if (link.closest(".article-cta")) return "article-cta";
+    if (link.closest(".page-final-cta")) return "final-cta";
+    if (link.closest(".service-hero")) return "service-hero";
+    if (link.closest(".hero")) return "hero";
+    return "content";
+  };
+
+  const inferServiceName = (link) => link.dataset.service || pageService;
 
   document.querySelectorAll("[data-current-year]").forEach((item) => {
     item.textContent = String(new Date().getFullYear());
@@ -33,17 +64,27 @@
     const target = event.target;
     if (!(target instanceof Element)) return;
 
-    const trackedLink = target.closest("a[data-event]");
+    const explicitTrackedLink = target.closest("a[data-event]");
+    const whatsappLink = target.closest('a[href*="wa.me/"]');
+    const trackedLink = explicitTrackedLink || whatsappLink;
     if (trackedLink) {
-      window.dataLayer = window.dataLayer || [];
-      window.dataLayer.push({
-        event: trackedLink.dataset.event,
-        cta_location: trackedLink.dataset.location,
-        service_name: trackedLink.dataset.service,
+      const isWhatsapp = Boolean(whatsappLink);
+      const visibleText = trackedLink.textContent.trim().replace(/\s+/g, " ");
+      const eventPayload = {
+        event: trackedLink.dataset.event || "click_whatsapp",
+        cta_location: inferCtaLocation(trackedLink),
+        service_name: inferServiceName(trackedLink),
         page_type: pageType,
-        page_path: window.location.pathname,
-        link_text: trackedLink.textContent.trim().replace(/\s+/g, " ").slice(0, 80)
-      });
+        page_path: pagePath,
+        link_text: (visibleText || trackedLink.getAttribute("aria-label") || "link").slice(0, 80)
+      };
+
+      if (isWhatsapp) {
+        eventPayload.contact_channel = "whatsapp";
+      }
+
+      window.dataLayer = window.dataLayer || [];
+      window.dataLayer.push(eventPayload);
     }
 
     const mobileLink = target.closest(".mobile-menu nav a");
@@ -100,7 +141,8 @@
         cta_location: form.dataset.formLocation || "quote-form",
         service_name: service,
         page_type: pageType,
-        page_path: window.location.pathname
+        page_path: pagePath,
+        contact_channel: "whatsapp"
       });
 
       const whatsappUrl = `https://wa.me/5581997842480?text=${encodeURIComponent(message)}`;

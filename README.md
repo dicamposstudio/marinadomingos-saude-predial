@@ -66,6 +66,16 @@ O evento `form_whatsapp_submit` é enviado ao `dataLayer` com o serviço escolhi
 a posição do formulário, o tipo de página e o caminho acessado. Nome, bairro/cidade
 e metragem não são enviados ao Analytics.
 
+Todos os links para o WhatsApp, inclusive os presentes no menu móvel e no rodapé,
+enviam o evento `click_whatsapp`. Os eventos incluem os parâmetros
+`cta_location`, `service_name`, `page_type`, `page_path`, `link_text` e
+`contact_channel`. A URL de destino e o texto pré-preenchido da conversa não são
+enviados ao Analytics.
+
+Para disponibilizar esses parâmetros nos relatórios do GA4, siga o roteiro em
+`CONFIGURACAO-GTM-EVENTOS.md` e publique o contêiner somente depois do teste no
+modo de visualização do Google Tag Manager.
+
 ## Atualizações futuras
 
 - Publicar as páginas novas somente depois da revisão de Marina;
