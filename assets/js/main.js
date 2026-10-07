@@ -8,6 +8,7 @@
   const pagePath = window.location.pathname;
 
   const serviceRoutes = [
+    ["/vistoria-de-imovel-recife/", "vistoria-imovel"],
     ["/vistoria-imovel-novo-recife/", "vistoria-imovel-novo"],
     ["/vistoria-pre-compra-recife/", "vistoria-pre-compra"],
     ["/vistoria-locacao-recife/", "vistoria-locacao"],
@@ -107,6 +108,7 @@
   });
 
   const serviceLabels = {
+    "vistoria-imovel": "Vistoria de Imóvel (preciso de orientação)",
     "vistoria-imovel-novo": "Vistoria de Imóvel Novo",
     "vistoria-pre-compra": "Vistoria Pré-Compra",
     "vistoria-locacao": "Vistoria de Locação",
