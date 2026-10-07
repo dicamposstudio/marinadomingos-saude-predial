@@ -94,6 +94,18 @@
     }
   });
 
+  document.querySelectorAll("[data-print-checklist]").forEach((button) => {
+    button.addEventListener("click", () => {
+      window.dataLayer = window.dataLayer || [];
+      window.dataLayer.push({
+        event: "print_checklist",
+        page_type: pageType,
+        page_path: pagePath
+      });
+      window.print();
+    });
+  });
+
   const serviceLabels = {
     "vistoria-imovel-novo": "Vistoria de Imóvel Novo",
     "vistoria-pre-compra": "Vistoria Pré-Compra",

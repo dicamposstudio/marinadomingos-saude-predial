@@ -48,7 +48,22 @@ exceto `link_text`, que não é usado no envio do formulário:
 
 O acionador deve ser o evento personalizado `form_whatsapp_submit`.
 
-## 4. Testar antes de publicar
+## 4. Configurar o evento opcional `print_checklist`
+
+O artigo de checklist agora possui um botão de impressão. Ao clicar, o site
+envia `print_checklist` ao `dataLayer`, com `page_type` e `page_path`.
+
+Para medir esse uso no GA4:
+
+1. Crie um acionador de **Evento personalizado** com o nome
+   `print_checklist`.
+2. Crie uma tag de evento do GA4 com o mesmo nome.
+3. Adicione `page_type` e `page_path` usando as variáveis já criadas.
+
+Esse evento indica uso do conteúdo, não pedido de orçamento. Portanto, não o
+marque como evento principal nem como conversão no Google Ads.
+
+## 5. Testar antes de publicar
 
 1. Clique em **Visualizar** no GTM e conecte `https://marinadomingos.com.br/`.
 2. Teste pelo menos um botão no cabeçalho, um no menu móvel, um no conteúdo, o
@@ -61,7 +76,10 @@ O acionador deve ser o evento personalizado `form_whatsapp_submit`.
 6. Estando tudo correto, publique o contêiner com um nome como
    `Mensuração de WhatsApp por página e serviço`.
 
-## 5. Criar dimensões personalizadas no GA4
+7. No artigo de checklist, clique em **Imprimir este checklist** e confirme o
+   disparo de `print_checklist`, caso a tag opcional tenha sido criada.
+
+## 6. Criar dimensões personalizadas no GA4
 
 Em **Administrador → Definições personalizadas → Criar dimensão personalizada**,
 crie dimensões com escopo **Evento** para:
@@ -78,6 +96,26 @@ GA4; não é necessário criar uma dimensão personalizada duplicada.
 As definições personalizadas não recuperam dados anteriores à criação. Depois
 da publicação, aguarde até 24–48 horas para usá-las nos relatórios comuns; o
 DebugView deve mostrar os eventos durante o teste.
+
+## 7. Usar os contatos como conversão no Google Ads
+
+O relatório de 7 de setembro a 6 de outubro de 2026 ainda mostra o aviso
+**Configurar o acompanhamento de conversões**. Sem essa etapa, o Google Ads não
+consegue otimizar a campanha para pedidos de orçamento.
+
+1. No GA4, marque `click_whatsapp` como evento principal.
+2. Mantenha `form_whatsapp_submit` como evento de diagnóstico no início, para
+   evitar interpretar dois tipos de contato como dois leads sem antes conferir
+   o comportamento real dos visitantes.
+3. Vincule GA4 e Google Ads, caso ainda não estejam vinculados.
+4. No Google Ads, importe `click_whatsapp` como conversão de lead.
+5. Em **Contagem**, use **Uma**, que é a opção adequada para leads.
+6. Teste com o Tag Assistant e confirme no Google Ads somente depois que o
+   evento aparecer no GA4.
+
+Após acumular volume, compare `click_whatsapp` e `form_whatsapp_submit`. Se o
+formulário representar um lead mais qualificado, ele poderá se tornar a ação
+principal, sem somar as duas indiscriminadamente.
 
 ## Privacidade
 
