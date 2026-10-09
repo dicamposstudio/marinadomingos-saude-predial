@@ -1560,7 +1560,8 @@ summary {
 }
 
 .quote-field input,
-.quote-field select {
+.quote-field select,
+.quote-field textarea {
   width: 100%;
   min-height: 3.35rem;
   border: 1px solid rgba(9, 40, 59, 0.2);
@@ -1571,17 +1572,25 @@ summary {
   transition: border-color var(--fast) ease, box-shadow var(--fast) ease, background var(--fast) ease;
 }
 
-.quote-field input::placeholder {
+.quote-field textarea {
+  min-height: 7.5rem;
+  resize: vertical;
+}
+
+.quote-field input::placeholder,
+.quote-field textarea::placeholder {
   color: rgba(39, 70, 87, 0.62);
 }
 
 .quote-field input:hover,
-.quote-field select:hover {
+.quote-field select:hover,
+.quote-field textarea:hover {
   border-color: rgba(47, 119, 158, 0.5);
 }
 
 .quote-field input:focus,
-.quote-field select:focus {
+.quote-field select:focus,
+.quote-field textarea:focus {
   outline: none;
   border-color: var(--blue);
   background: var(--white);

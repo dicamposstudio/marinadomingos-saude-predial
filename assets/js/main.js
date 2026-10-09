@@ -6,6 +6,12 @@
   const reducedMotion = window.matchMedia("(prefers-reduced-motion: reduce)").matches;
   const pageType = document.body.dataset.pageType || "institutional_home";
   const pagePath = window.location.pathname;
+  const urlParams = new URLSearchParams(window.location.search);
+  const sourceParam = String(urlParams.get("utm_source") || "").trim().toLowerCase();
+  const paidGoogleVisit = sourceParam === "google" || urlParams.has("gclid");
+  const trafficSource = paidGoogleVisit ? "google" : sourceParam || "direct";
+  const campaignName = String(urlParams.get("utm_campaign") || "").trim();
+  const trackingKeys = ["gclid", "utm_source", "utm_medium", "utm_campaign", "utm_content", "utm_term"];
 
   const serviceRoutes = [
     ["/vistoria-de-imovel-recife/", "vistoria-imovel"],
@@ -37,6 +43,34 @@
   };
 
   const inferServiceName = (link) => link.dataset.service || pageService;
+
+  if (trackingKeys.some((key) => urlParams.has(key))) {
+    document.querySelectorAll("a[href]").forEach((link) => {
+      const rawHref = link.getAttribute("href");
+      if (!rawHref || rawHref.startsWith("#")) return;
+
+      const destination = new URL(rawHref, window.location.href);
+      if (destination.origin !== window.location.origin) return;
+
+      trackingKeys.forEach((key) => {
+        if (urlParams.has(key) && !destination.searchParams.has(key)) {
+          destination.searchParams.set(key, urlParams.get(key));
+        }
+      });
+      link.href = destination.toString();
+    });
+  }
+
+  if (paidGoogleVisit) {
+    document.querySelectorAll('a[href*="wa.me/"]').forEach((link) => {
+      const destination = new URL(link.href);
+      const currentMessage = destination.searchParams.get("text") || "";
+      if (!currentMessage.includes("Vim pelo Google")) {
+        destination.searchParams.set("text", `${currentMessage}${currentMessage ? "\n\n" : ""}Vim pelo Google.`);
+        link.href = destination.toString();
+      }
+    });
+  }
 
   document.querySelectorAll("[data-current-year]").forEach((item) => {
     item.textContent = String(new Date().getFullYear());
@@ -77,8 +111,13 @@
         service_name: inferServiceName(trackedLink),
         page_type: pageType,
         page_path: pagePath,
+        traffic_source: trafficSource,
         link_text: (visibleText || trackedLink.getAttribute("aria-label") || "link").slice(0, 80)
       };
+
+      if (campaignName) {
+        eventPayload.campaign_name = campaignName;
+      }
 
       if (isWhatsapp) {
         eventPayload.contact_channel = "whatsapp";
@@ -134,20 +173,30 @@
       const data = new FormData(form);
       const name = String(data.get("name") || "").trim();
       const service = String(data.get("service") || "").trim();
+      const propertyType = String(data.get("property_type") || "").trim();
       const location = String(data.get("location") || "").trim();
       const area = String(data.get("area") || "").trim();
+      const desiredDate = String(data.get("desired_date") || "").trim();
+      const notes = String(data.get("notes") || "").trim();
       const serviceLabel = serviceLabels[service] || service;
+      const formattedDate = desiredDate ? desiredDate.split("-").reverse().join("/") : "Não informada";
+      const sourceMessage = paidGoogleVisit
+        ? "Vim pelo Google e gostaria de receber um orçamento."
+        : "Vim pelo site e gostaria de receber um orçamento.";
 
       const message = [
         `Olá, Marina! Meu nome é ${name}.`,
         "Gostaria de solicitar informações sobre:",
         "",
         `🏠 Serviço: ${serviceLabel}`,
+        propertyType ? `🏢 Tipo de imóvel: ${propertyType}` : null,
         `📍 Localização: ${location}`,
-        `📐 Área aproximada: ${area} m²`,
+        `📐 Área aproximada: ${area ? `${area} m²` : "Não informada"}`,
+        `📅 Data desejada: ${formattedDate}`,
+        notes ? `📝 Observação: ${notes}` : null,
         "",
-        "Vim pelo site e gostaria de receber um orçamento."
-      ].join("\n");
+        sourceMessage
+      ].filter(Boolean).join("\n");
 
       window.dataLayer = window.dataLayer || [];
       window.dataLayer.push({
@@ -156,6 +205,9 @@
         service_name: service,
         page_type: pageType,
         page_path: pagePath,
+        property_type: propertyType || "nao_informado",
+        traffic_source: trafficSource,
+        campaign_name: campaignName || "nao_informada",
         contact_channel: "whatsapp"
       });
 
