@@ -1034,3 +1034,7 @@
     width: 100%;
   }
 }
+
+/* SEO 2026-10: area de atendimento no hero de vistoria de imovel novo */
+.service-area {margin:1rem 0 0;max-width:690px;font-size:.98rem;line-height:1.55;font-weight:650;color:#2d627d}
+@media(max-width:650px){.service-area{font-size:.9rem}}
