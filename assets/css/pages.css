@@ -1075,3 +1075,54 @@
     font-size: clamp(2.25rem, 8.8vw, 3rem);
   }
 }
+
+
+/* Prioridade ao contato nas páginas de imóvel novo e pré-compra. */
+.service-contact-priority .service-hero {
+  padding-block: clamp(2.5rem, 4vw, 4rem);
+}
+
+.service-contact-priority .service-hero-grid {
+  gap: clamp(1.5rem, 4vw, 4rem);
+}
+
+.service-contact-priority .service-hero h1 {
+  font-size: clamp(2.75rem, 4.25vw, 4.75rem);
+  line-height: 1.02;
+}
+
+.service-contact-priority .service-hero-lead {
+  margin-top: 1.15rem;
+  line-height: 1.55;
+}
+
+.service-contact-priority .service-hero-actions {
+  margin-top: 1.3rem;
+  gap: 0.8rem 1.2rem;
+}
+
+.service-contact-priority .service-contact-note {
+  max-width: 45rem;
+  margin: 0.9rem 0 0;
+  color: var(--ink-soft);
+  font-size: 0.875rem;
+  line-height: 1.5;
+}
+
+.service-contact-priority .service-area {
+  margin-top: 0.8rem;
+}
+
+@media (max-width: 650px) {
+  .service-contact-priority .service-hero {
+    padding-block: 2rem 2.5rem;
+  }
+
+  .service-contact-priority .service-hero h1 {
+    font-size: clamp(2.3rem, 8vw, 3rem);
+  }
+
+  .service-contact-priority .service-hero-actions .button {
+    width: 100%;
+  }
+}
