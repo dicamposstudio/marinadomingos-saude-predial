@@ -19,6 +19,8 @@
     ["/vistoria-pre-compra-recife/", "vistoria-pre-compra"],
     ["/vistoria-locacao-recife/", "vistoria-locacao"],
     ["/laudos-patologia-construcoes-recife/", "laudo-patologia"],
+    ["/vistoria-cautelar-vizinhanca-recife/", "cautelar-vizinhanca"],
+    ["/inspecao-predial-recife/", "inspecao-predial"],
     ["/blog/checklist-vistoria-apartamento-novo/", "vistoria-imovel-novo"],
     ["/blog/o-que-verificar-imovel-usado/", "vistoria-pre-compra"],
     ["/blog/fissura-ou-infiltracao-quando-chamar-profissional/", "laudo-patologia"],
