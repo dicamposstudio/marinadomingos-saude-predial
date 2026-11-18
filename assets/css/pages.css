@@ -1126,3 +1126,6 @@
     width: 100%;
   }
 }
+
+/* Orientação de orçamento junto aos botões das páginas de serviço. */
+.service-quote-hint { margin: .85rem 0 0; max-width: 42rem; font-size: .9rem; line-height: 1.55; color: var(--ink-soft); }
