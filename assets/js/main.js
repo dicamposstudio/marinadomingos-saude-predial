@@ -20,6 +20,7 @@
   const serviceRoutes = [
     ["/vistoria-de-imovel-recife/", "vistoria-imovel"],
     ["/vistoria-imovel-novo-recife/", "vistoria-imovel-novo"],
+    ["/vistoria-minha-casa-minha-vida-recife/", "vistoria-imovel-novo"],
     ["/vistoria-pre-compra-recife/", "vistoria-pre-compra"],
     ["/vistoria-locacao-recife/", "vistoria-locacao"],
     ["/laudos-patologia-construcoes-recife/", "laudo-patologia"],
@@ -179,6 +180,51 @@
       serviceSelect.value = defaultService;
     }
 
+    // Contexto opcional do orçamento: permanece local até o envio ao WhatsApp.
+    // Nenhum texto livre ou identificador do cliente é enviado ao dataLayer.
+    const fieldHost = form.querySelector(".quote-fields");
+    const context = document.createElement("div");
+    context.className = "quote-field-wide quote-context";
+    const contextOptions = {
+      "vistoria-imovel-novo": [{label:"Etapa da entrega", options:["Aguardando a data","Vistoria agendada","Chaves já recebidas","Revistoria"]},{label:"Atendimento", options:["Uma unidade","Consultar atendimento de várias unidades"]},{label:"Nome do empreendimento",input:"text"},{label:"Data prevista da vistoria",input:"date"}],
+      "vistoria-locacao": [{label:"Finalidade",options:["Entrada","Saída"]},{label:"Mobiliário",options:["Não mobiliado","Mobiliado","Parcialmente mobiliado"]}],
+      "vistoria-pre-compra": [{label:"Etapa da compra",options:["Visitando imóveis","Em negociação","Proposta realizada"]}],
+      "laudo-patologia": [{label:"Manifestação principal",options:["Fissuras ou trincas","Umidade ou infiltração","Revestimentos","Outra / preciso de orientação"]}],
+      "cautelar-vizinhanca": [{label:"Etapa da obra",options:["Antes do início","Obra em andamento","Preciso de orientação"]}],
+      "inspecao-predial": [{label:"Finalidade",options:["Manutenção preventiva","Avaliação de condições aparentes","Preciso de orientação"]}]
+    };
+    const refreshContext = () => {
+      context.replaceChildren();
+      const choices = contextOptions[serviceSelect?.value] || [];
+      context.hidden = !choices.length;
+      choices.forEach((item,index) => {
+        const label = document.createElement("label"); label.className = "quote-field";
+        const title = document.createElement("span"); title.textContent = item.label + " (opcional)";
+        if (item.input === "date" && form.elements.namedItem("desired_date")) return;
+        const control = document.createElement(item.input ? "input" : "select");
+        control.name = "quote_context_" + index; control.dataset.contextLabel = item.label;
+        if (item.input) {
+          control.type = item.input;
+          if (item.input === "text") { control.maxLength = 100; control.placeholder = "Se souber"; }
+        } else {
+          control.add(new Option("Selecione, se souber", ""));
+          item.options.forEach((value) => control.add(new Option(value,value)));
+        }
+        label.append(title,control);context.append(label);
+      });
+    };
+    if (fieldHost && serviceSelect instanceof HTMLSelectElement) {
+      if (!form.elements.namedItem("property_type")) {
+        const label = document.createElement("label"); label.className = "quote-field";
+        const title = document.createElement("span"); title.textContent = "Tipo de imóvel (opcional)";
+        const select = document.createElement("select"); select.name = "property_type";
+        select.add(new Option("Selecione, se souber",""));
+        ["Apartamento","Casa","Sala ou imóvel comercial","Edifício / condomínio","Outro tipo de imóvel"].forEach((value)=>select.add(new Option(value,value)));
+        label.append(title,select);fieldHost.append(label);
+      }
+      fieldHost.append(context);refreshContext();serviceSelect.addEventListener("change",refreshContext);
+    }
+
     form.addEventListener("submit", (event) => {
       event.preventDefault();
 
@@ -193,6 +239,9 @@
       const desiredDate = String(data.get("desired_date") || "").trim();
       const notes = String(data.get("notes") || "").trim();
       const serviceLabel = serviceLabels[service] || service;
+      const contextLines = Array.from(context.querySelectorAll("[data-context-label]"))
+        .filter((control) => control.value.trim()).map((control) => control.dataset.contextLabel + ": " + (control.type === "date" ? control.value.split("-").reverse().join("/") : control.value.trim()));
+      if (pageType === "service_mcmv" && service === "vistoria-imovel-novo") contextLines.unshift("Interesse: imóvel Minha Casa Minha Vida");
       const formattedDate = desiredDate ? desiredDate.split("-").reverse().join("/") : "Não informada";
       const sourceMessage = googleBusinessProfileVisit
         ? "Encontrei Marina pelo Perfil da Empresa no Google e gostaria de receber um orçamento."
@@ -209,6 +258,7 @@
         `📍 Localização: ${location}`,
         `📐 Área aproximada: ${area ? `${area} m²` : "Não informada"}`,
         `📅 Data desejada: ${formattedDate}`,
+        ...contextLines,
         notes ? `📝 Observação: ${notes}` : null,
         "",
         sourceMessage
