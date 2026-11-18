@@ -8,10 +8,14 @@
   const pagePath = window.location.pathname;
   const urlParams = new URLSearchParams(window.location.search);
   const sourceParam = String(urlParams.get("utm_source") || "").trim().toLowerCase();
-  const paidGoogleVisit = sourceParam === "google" || urlParams.has("gclid");
-  const trafficSource = paidGoogleVisit ? "google" : sourceParam || "direct";
+  const mediumParam = String(urlParams.get("utm_medium") || "").trim().toLowerCase();
   const campaignName = String(urlParams.get("utm_campaign") || "").trim();
-  const trackingKeys = ["gclid", "utm_source", "utm_medium", "utm_campaign", "utm_content", "utm_term"];
+  const googleVisit = sourceParam === "google" || ["gclid", "gbraid", "wbraid"].some((key) => urlParams.has(key));
+  const paidGoogleVisit = ["gclid", "gbraid", "wbraid"].some((key) => urlParams.has(key)) ||
+    (googleVisit && ["cpc", "ppc", "paid", "paid_search", "paidsearch"].includes(mediumParam));
+  const googleBusinessProfileVisit = sourceParam === "google" && campaignName === "perfil_empresa";
+  const trafficSource = googleVisit ? "google" : sourceParam || "direct";
+  const trackingKeys = ["gclid", "gbraid", "wbraid", "utm_source", "utm_medium", "utm_campaign", "utm_content", "utm_term"];
 
   const serviceRoutes = [
     ["/vistoria-de-imovel-recife/", "vistoria-imovel"],
@@ -24,6 +28,10 @@
     ["/blog/checklist-vistoria-apartamento-novo/", "vistoria-imovel-novo"],
     ["/blog/o-que-verificar-imovel-usado/", "vistoria-pre-compra"],
     ["/blog/fissura-ou-infiltracao-quando-chamar-profissional/", "laudo-patologia"],
+    ["/blog/pendencias-vistoria-entrega-chaves/", "vistoria-imovel-novo"],
+    ["/blog/quanto-custa-vistoria-apartamento-recife/", "vistoria-imovel"],
+    ["/blog/vale-a-pena-vistoria-antes-comprar-imovel-usado/", "vistoria-pre-compra"],
+    ["/blog/vistoria-entrada-saida-diferencas/", "vistoria-locacao"],
     ["/casos-reais/", "casos-reais"],
     ["/blog/", "conteudos"]
   ];
@@ -63,12 +71,15 @@
     });
   }
 
-  if (paidGoogleVisit) {
+  if (googleVisit) {
     document.querySelectorAll('a[href*="wa.me/"]').forEach((link) => {
       const destination = new URL(link.href);
       const currentMessage = destination.searchParams.get("text") || "";
-      if (!currentMessage.includes("Vim pelo Google")) {
-        destination.searchParams.set("text", `${currentMessage}${currentMessage ? "\n\n" : ""}Vim pelo Google.`);
+      const sourceNote = googleBusinessProfileVisit
+        ? "Encontrei você pelo Perfil da Empresa no Google."
+        : "Vim pelo Google.";
+      if (!currentMessage.includes(sourceNote)) {
+        destination.searchParams.set("text", `${currentMessage}${currentMessage ? "\n\n" : ""}${sourceNote}`);
         link.href = destination.toString();
       }
     });
@@ -114,6 +125,7 @@
         page_type: pageType,
         page_path: pagePath,
         traffic_source: trafficSource,
+        traffic_medium: mediumParam || (paidGoogleVisit ? "cpc" : "nao_informado"),
         link_text: (visibleText || trackedLink.getAttribute("aria-label") || "link").slice(0, 80)
       };
 
@@ -182,9 +194,11 @@
       const notes = String(data.get("notes") || "").trim();
       const serviceLabel = serviceLabels[service] || service;
       const formattedDate = desiredDate ? desiredDate.split("-").reverse().join("/") : "Não informada";
-      const sourceMessage = paidGoogleVisit
-        ? "Vim pelo Google e gostaria de receber um orçamento."
-        : "Vim pelo site e gostaria de receber um orçamento.";
+      const sourceMessage = googleBusinessProfileVisit
+        ? "Encontrei Marina pelo Perfil da Empresa no Google e gostaria de receber um orçamento."
+        : googleVisit
+          ? "Vim pelo Google e gostaria de receber um orçamento."
+          : "Vim pelo site e gostaria de receber um orçamento.";
 
       const message = [
         `Olá, Marina! Meu nome é ${name}.`,
@@ -209,6 +223,7 @@
         page_path: pagePath,
         property_type: propertyType || "nao_informado",
         traffic_source: trafficSource,
+        traffic_medium: mediumParam || (paidGoogleVisit ? "cpc" : "nao_informado"),
         campaign_name: campaignName || "nao_informada",
         contact_channel: "whatsapp"
       });

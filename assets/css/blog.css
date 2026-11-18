@@ -36,3 +36,8 @@
 @media print{.site-header,.page-breadcrumb,.article-toc,.author-box,.article-cta,.related-articles,.site-footer,.floating-whatsapp,.article-print-button{display:none!important}.article-hero,.article-main{padding-block:1rem}.article-hero::after{display:none}.article-layout{display:block}.article-body{max-width:none}.article-body h2,.article-body h3{break-after:avoid}.article-checklist li{break-inside:avoid}.article-callout{border:1px solid #999;background:transparent}}
 
 .article-meta a[rel="author"]{color:var(--blue);text-decoration:underline;text-underline-offset:.2em}
+
+/* Link contextual do artigo para o serviço correspondente. */
+.article-cta .article-service-link { margin: 1.1rem 0 0; font-size: .94rem; }
+.article-cta .article-service-link a { color: var(--white); text-decoration: underline; text-underline-offset: .25em; font-weight: 700; }
+.article-cta .article-service-link a:hover, .article-cta .article-service-link a:focus-visible { color: #bde7ff; }

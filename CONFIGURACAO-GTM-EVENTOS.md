@@ -17,6 +17,8 @@ Use a **Versão 2** e crie estas variáveis:
 | DLV - page_path | `page_path` |
 | DLV - link_text | `link_text` |
 | DLV - contact_channel | `contact_channel` |
+| DLV - traffic_medium | `traffic_medium` |
+| DLV - campaign_name | `campaign_name` |
 
 ## 2. Completar a tag do evento `click_whatsapp`
 
@@ -32,6 +34,8 @@ Use a **Versão 2** e crie estas variáveis:
 | `page_path` | `{{DLV - page_path}}` |
 | `link_text` | `{{DLV - link_text}}` |
 | `contact_channel` | `{{DLV - contact_channel}}` |
+| `traffic_medium` | `{{DLV - traffic_medium}}` |
+| `campaign_name` | `{{DLV - campaign_name}}` |
 
 O acionador deve continuar sendo o evento personalizado `click_whatsapp`.
 
@@ -45,6 +49,8 @@ exceto `link_text`, que não é usado no envio do formulário:
 - `page_type` → `{{DLV - page_type}}`
 - `page_path` → `{{DLV - page_path}}`
 - `contact_channel` → `{{DLV - contact_channel}}`
+- `traffic_medium` → `{{DLV - traffic_medium}}`
+- `campaign_name` → `{{DLV - campaign_name}}`
 
 O acionador deve ser o evento personalizado `form_whatsapp_submit`.
 
@@ -89,6 +95,7 @@ crie dimensões com escopo **Evento** para:
 - `page_type` — nome sugerido: **Tipo de página**;
 - `link_text` — nome sugerido: **Texto do link**;
 - `contact_channel` — nome sugerido: **Canal de contato**.
+- `traffic_medium` — nome sugerido: **Mídia de origem do CTA** (opcional; somente se desejar relatórios por botão).
 
 O `page_path` pode ser analisado pelas dimensões nativas de caminho da página do
 GA4; não é necessário criar uma dimensão personalizada duplicada.
@@ -151,3 +158,14 @@ das plataformas.
 O rastreamento não envia nome, bairro/cidade, metragem, telefone do visitante,
 URL do WhatsApp nem o texto pré-preenchido da conversa. Esses dados permanecem
 fora do GA4.
+
+## 8. Ajuste de origem do Google Meu Negócio — novembro/2026
+
+- O campo de site do Perfil da Empresa no Google da Marina utiliza:
+  `utm_source=google&utm_medium=organic&utm_campaign=perfil_empresa`.
+- O JavaScript distingue uma visita com esse UTM de uma visita paga marcada por `gclid`, `gbraid`, `wbraid` ou `utm_medium=cpc`. Não classificar `utm_source=google` sozinho como tráfego pago.
+- O site já preserva UTMs em links internos e passa `traffic_medium` e `campaign_name` ao `dataLayer` nos eventos de contato.
+- Nos botões do WhatsApp e no formulário, um visitante identificado por `perfil_empresa` recebe uma mensagem de origem específica. A mensagem só é enviada se o visitante confirmar no WhatsApp.
+- Para disponibilizar `cta_location` como dimensão nos relatórios do GA4, é necessário **publicar as alterações no contêiner do GTM e criar a dimensão personalizada no GA4**. Este repositório não possui acesso administrativo para realizar essas duas etapas diretamente.
+- O GTM deve evitar disparar duas tags de GA4 para o mesmo `click_whatsapp` e manter `form_whatsapp_submit` como ação principal e `click_whatsapp` como observação, conforme a configuração atual.
+- Após publicar o GTM, valide com **Tag Assistant** e **DebugView** um acesso contendo `utm_campaign=perfil_empresa`, um clique no cabeçalho, outro no CTA da landing de locação e um envio de formulário. Não inclua dados pessoais no evento.
