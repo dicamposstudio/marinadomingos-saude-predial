@@ -1653,3 +1653,9 @@ summary {
   }
 }
 
+
+/* Contexto opcional do formulário, sem alterar os eventos existentes. */
+.quote-context{grid-column:1/-1;display:grid;grid-template-columns:repeat(auto-fit,minmax(min(100%,13rem),1fr));gap:1rem;padding-top:.2rem}
+.quote-context[hidden]{display:none}
+.portfolio-links{display:flex;flex-wrap:wrap;gap:.85rem 1.4rem;align-items:center;margin-top:1.3rem}
+.portfolio-links a,.scope-disclaimer a{text-underline-offset:.2em}
